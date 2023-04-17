@@ -79,8 +79,8 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 			},
 			{
 				Type:   mount.TypeBind,
-				Source: "/var/run/docker.sock",
-				Target: "/var/run/docker.sock",
+				Source: "var/run/docker.sock",
+				Target: "var/run/docker.sock",
 			},
 		},
 	}
