@@ -16,7 +16,8 @@ jobs:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        KEY: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.com
         PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
         source: "."
@@ -28,5 +29,6 @@ jobs:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        KEY: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.com
         script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
