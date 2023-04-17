@@ -67,8 +67,8 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 		},
 		Resources: container.Resources{
 			MemoryReservation: 512 * 1024 * 1024,
-			CpusetCpus:        "0,5",
-			CPUQuota:          10000,
+			//CpusetCpus:        "0,5",
+			CPUQuota: 10000,
 		},
 		Mounts: []mount.Mount{
 			{
