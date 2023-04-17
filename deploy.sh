@@ -1,9 +1,9 @@
 # !/bin/bash
 
-docker stop api-marketplace
-docker rm api-marketplace
+docker stop api-hosting
+docker rm api-hosting
 
-servicio=api-marketplace
+servicio=api-hosting
 
 #PRODUCTION
 docker run -d \

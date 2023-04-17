@@ -17,10 +17,10 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        PROJECT_PATH: "/home/cloud/golang_projects/api-marketplace"
+        PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
         source: "."
-        target: "/home/cloud/golang_projects/api-marketplace"
+        target: "/home/cloud/golang_projects/api-hosting"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
@@ -29,4 +29,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: bash /home/cloud/golang_projects/api-marketplace/build.sh && bash /home/cloud/golang_projects/api-marketplace/deploy.sh
+        script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
