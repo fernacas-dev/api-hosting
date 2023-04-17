@@ -13,10 +13,10 @@ jobs:
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
       env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
+        HOST: srv53119-206152.vps.etecsa.cu #${{ secrets.HOST }}
+        USERNAME: cloud #${{ secrets.USERNAME }}
         PASSWORD: DontTouchMyServer2021*
-        PORT: ${{ secrets.PORT }}
+        PORT: 22 #${{ secrets.PORT }}
         #KEY: ${{ secrets.SSHKEY }}
         PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
@@ -26,9 +26,9 @@ jobs:
     - name: Executing remote command
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
+        HOST: srv53119-206152.vps.etecsa.cu #${{ secrets.HOST }}
+        USERNAME: cloud #${{ secrets.USERNAME }}
         PASSWORD: DontTouchMyServer2021*
-        PORT: ${{ secrets.PORT }}
+        PORT: 22 #${{ secrets.PORT }}
         #KEY: ${{ secrets.SSHKEY }}
         script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
