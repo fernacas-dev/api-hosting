@@ -1,4 +1,5 @@
-FROM golang:debian as builder
+FROM golang as builder
+#FROM golang:debian as builder
 ENV GOPROXY="http://nexus.prod.uci.cu/repository/go-all/"
 WORKDIR /app 
 COPY . .
