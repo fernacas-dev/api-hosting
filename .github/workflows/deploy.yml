@@ -15,9 +15,9 @@ jobs:
       env:
         HOST: srv53119-206152.vps.etecsa.cu #${{ secrets.HOST }}
         USERNAME: cloud #${{ secrets.USERNAME }}
-        PASSWORD: DontTouchMyServer2021*
+        #PASSWORD: DontTouchMyServer2021*
         PORT: 22 #${{ secrets.PORT }}
-        #KEY: ${{ secrets.SSHKEY }}
+        KEY: ${{ secrets.SSHKEY }}
         PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
         source: "."
@@ -28,7 +28,7 @@ jobs:
       with:
         HOST: srv53119-206152.vps.etecsa.cu #${{ secrets.HOST }}
         USERNAME: cloud #${{ secrets.USERNAME }}
-        PASSWORD: DontTouchMyServer2021*
+        #PASSWORD: DontTouchMyServer2021*
         PORT: 22 #${{ secrets.PORT }}
-        #KEY: ${{ secrets.SSHKEY }}
+        KEY: ${{ secrets.SSHKEY }}
         script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
