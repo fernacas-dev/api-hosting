@@ -46,7 +46,8 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 		Image: containerImage,
 		Volumes: map[string]struct{}{
 			//volume.Name + ":/var/www/html": {},
-			"wordpress-web:/var/www/html": {},
+			"wordpress-web:/var/www/html":               {},
+			"/var/run/docker.sock:/var/run/docker.sock": {},
 		},
 		ExposedPorts: nat.PortSet{
 			"80/tcp": struct{}{},
@@ -76,11 +77,16 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 				Source: "wordpress-web",
 				Target: "/var/www/html",
 			},
+			{
+				Type:   mount.TypeBind,
+				Source: "/var/run/docker.sock",
+				Target: "/var/run/docker.sock",
+			},
 		},
 	}
 
 	netConfig := network.EndpointSettings{
-		NetworkID: "d37b9e8b6ff6aec262eea96d1a32a9893a94e8adee800c721c8735a20b6c9f4b",
+		NetworkID: "9fcfd027e514324d99e13eb8b7089be1e9f966f7a21445b75bc7602bfcde1902 ",
 	}
 
 	networkConfig := network.NetworkingConfig{
