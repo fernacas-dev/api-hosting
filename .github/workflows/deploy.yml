@@ -31,4 +31,4 @@ jobs:
         PORT: 22
         KEY: |
           ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSpZhkmAfbZlWaf8sHqRf7rIiCYv0IEgAUVCp87JzzDFbR+fu412C7+YrkziB5LENsURAdNQyvLvq+HCE6RAvAUIntad6DF6stOWNDCjkc3zeLZAs8nOmpu0t8Xny0AO5LMrKPB7Z16K6VZ9ZQDLgGLxicq4d/u08COfGm7jUG3QBUgA68U3QHf/t7Hhh0n3nmhOz2qHXugbBGmb26pdyxBuHzM7rIJmGkZPWYY11ID8vTvJ/bKtExnMgndap0TzaawqhnBDHQK95UGJ+akG3ELlCq/H7eO6Ec5wa95qoV4kvdQa7l9+qM9H8E5DMA/zAGvgX1MqEVxSOzXt0VGed34nJu8OLCuBSQz00zW92D2MqsuEIm/l1qVERJGfpJX8xM7byCPbvdBJBHkTeCg8d7mGp+a8tkQwuAPZldWdq0POXu3OhwQ2Ddv7V7SqoLKAkS71DkFH+GmuZsQ/jmrDpaYVzsQpXhqTObKUMXKXFfhujOY2P7rAmHPLgkmUBydBc= Fernando@DESKTOP-3VLADO3
-       script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
+        script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
