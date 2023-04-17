@@ -15,8 +15,9 @@ jobs:
       env:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: DontTouchMyServer2021*
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        #KEY: ${{ secrets.SSHKEY }}
         PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
         source: "."
@@ -27,6 +28,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: DontTouchMyServer2021*
         PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        #KEY: ${{ secrets.SSHKEY }}
         script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
