@@ -30,4 +30,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: bash /home/cloud/golang_projects/api-hosting/local-run.sh
+        script: go run /home/cloud/golang_projects/api-hosting/cmd/main.go
