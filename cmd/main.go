@@ -52,7 +52,7 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 			"80/tcp": struct{}{},
 		},
 		Labels: map[string]string{
-			"traefik.http.routers.wordpress.rule": "Host(`wordpress.docker.localhost`)",
+			"traefik.http.routers.wordpress.rule": "Host(`wordpress.docker.vps`)",
 		},
 	}
 
