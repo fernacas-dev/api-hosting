@@ -17,34 +17,7 @@ jobs:
         USERNAME: cloud
         PORT: 22
         KEY: |
-          -----BEGIN OPENSSH PRIVATE KEY-----
-          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
-          IDBAUGBw==
-          -----END OPENSSH PRIVATE KEY-----
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.comAAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ==ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.com
         PROJECT_PATH: "/home/cloud/golang_projects/api-hosting"
       with:
         source: "."
@@ -53,36 +26,9 @@ jobs:
     - name: Executing remote command
       uses: appleboy/ssh-action@master
       with:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
+        HOST: 152.206.119.53
+        USERNAME: cloud
+        PORT: 22
         KEY: |
-          -----BEGIN OPENSSH PRIVATE KEY-----
-          b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
-          NhAAAAAwEAAQAAAQEAxobT8ZpOTZ/ZxhRcm/8vmjby0sGw6AytkNLTcOnwITq/ESK0IHQo
-          Cp/bVTTl5/pRnBxI9AA2r9OkGTdmgOaKQFErKvuZDCZpOTPPLUttov+UkROqs69IjZdtqU
-          shUQ5clvBjvEVYkxurN5VFeuvyfxZLfT77neMmeyRmYWdyLmNhj544VkNRZs2eR6eVeJgW
-          OKdEL4g62idw9xpOFiey8yW4AgbUUJDXsctDAwdbifY2VchTQOEBTelyhRsyjoAqSBK7lx
-          Lhp9uMXVIq3GO3JUjUsTZ8U0/xuTKjsWFCwiVdSEx9ZzGhustbbE7PiklyJyg+IO1hLfgw
-          pX+pPtN9uQAAA+AlXSfHJV0nxwAAAAdzc2gtcnNhAAABAQDGhtPxmk5Nn9nGFFyb/y+aNv
-          LSwbDoDK2Q0tNw6fAhOr8RIrQgdCgKn9tVNOXn+lGcHEj0ADav06QZN2aA5opAUSsq+5kM
-          Jmk5M88tS22i/5SRE6qzr0iNl22pSyFRDlyW8GO8RViTG6s3lUV66/J/Fkt9Pvud4yZ7JG
-          ZhZ3IuY2GPnjhWQ1FmzZ5Hp5V4mBY4p0QviDraJ3D3Gk4WJ7LzJbgCBtRQkNexy0MDB1uJ
-          9jZVyFNA4QFN6XKFGzKOgCpIEruXEuGn24xdUircY7clSNSxNnxTT/G5MqOxYULCJV1ITH
-          1nMaG6y1tsTs+KSXInKD4g7WEt+DClf6k+0325AAAAAwEAAQAAAQB3O8kVZUi8JFKGPfp1
-          EqnDZFcor34RkHO59HVbbpVzT7Yrk309tKXL48C2hyPB1LypFu/V5D70EReQsY5VwqCsCl
-          Pz59I+0t8FpRE8Mf4yFHBlRbuTWaYorBcHw4DKDucbHFu6WqfdCpQluPhW4FjvbTN/kJFM
-          fX3CHdWDkL6qDqSbejBQbWEZsxpQA24/NsVgEP/0FkUn+wNRafEmZGj2hKhaceA9HHX0nZ
-          euwR+H1nTCzPuOdyllGUr3ea8rm3vnZnBgmUKG0y5Ixmt8gvg4ProcDCjxvT3+5S4Atdtw
-          A6FMgV5XrMuoqo9/rfyu8JkdgULZUwx3UBIngoW3xQGBAAAAgQDh/SX6Jzq7KtEDcPD2e3
-          zg1uiXD56pdXuGWomRFAuu25wNWB2cI9rWE51GUzqs/EsGCS0hvSoAdK7MGCWHvIDT8RGA
-          JBCZi90L9dq4gOd9t/lYdCBHmId7KehaOhhMNgwHs3XnOsGv4q/qfJj8vd2yCAO+sxcQQS
-          suxhOEaEu8qQAAAIEA8xXVHBTkzBytit8U+NlqUXSGF/JEW0J/wvE9/4hnfUHq7qZL1zaD
-          mK55A04cpY7nV6Pbuq3O+r5+MUM8YGUczNSQ83XTKKxaeb/L+ys7lPD2tneDGzpBnwJv4t
-          Ky12F6kimo/XdfTKqDa1DVTwcdr7EXGGivTvUIZiF2myqjjDEAAACBANES9dN3WNoyjB5X
-          PdGa2NmREKVyB6H5CxVcTwgvk8QqzZFBSLlFzjC+MBGk0inNae8BT/4mRLzI6LH4rYK78V
-          kty8IxCvFP6eiKuSstwxPoTAqGy9Is4pe01Z8zKvst/q2/R9kIj8GVrLBSb5gdkloNrUwT
-          bYS79fQoDYWNuJAJAAAAI2Nsb3VkQHNydjUzMTE5LTIwNjE1Mi52cHMuZXRlY3NhLmN1AQ
-          IDBAUGBw==
-          -----END OPENSSH PRIVATE KEY-----
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.comAAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ==ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDy/GA9PAOhH7bxbV3pcbI/aisLr7PQ4Hg+h+xNV0aShqWmHuicULChN8ORSR6ZJDKv67YALMkjSiaUN1s5gy9WPcrFEwz64xpEfAdzpuo7wtGZr/BvNAD7w2tpgkD+hErTI0z6IBTizWLELtbwsSLudHzuu8S5ezPeQCb34egBe7mONO/X1gcsanxgVBmjoZzj03J6pqEqjL1fItgcT7FUEjHR531eoCXXX9oDynfFosvKMFyux/QdaM6HVfiTR2usmnIoEgtmVSSIBsGy4W0vWyKtOuMksqSlX9bcmLemSZruOSjyjXorbPstLtQubmfhqhroRg/9gOxGKl7s7nVOBhg9bpA/4Nqf4Ws1ZPVhT73t0JcuT+JzXq68vzz40CC2Axf+fiWu+VAzeQrMojvFNT76wSKF3ewXHT6lM99i8TMooVYCwo//+St0m7o3K1rCYJqIfVRDzqpb/YqNNDowby0JawmChDwtBK6GkxBRfRmyNY92+BxQXoQEs97XeWROyBffu+dXU9/OQxIM5nUyvBoMGk5exZ2o/b07XftpfDvqy4HF7gYcbOHRXX1wukkVcLHNK18hYXbOOwvko3YFuiAG7Y/zq4Mc5b+A5d7yMQ/oy0KVf/DYujP7qJIHUQKXxjQQ4CobaAmb5zyFlyjurCsaCd8SBQeKC2cVDVV0tQ== fernan2cas96@gmail.com
         script: bash /home/cloud/golang_projects/api-hosting/build.sh && bash /home/cloud/golang_projects/api-hosting/deploy.sh
