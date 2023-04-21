@@ -29,6 +29,29 @@ func listContainers(ctx context.Context, cli *client.Client) {
 	}
 }
 
+func findNetwork(ctx context.Context, cli *client.Client, networkName string) (networkId string, err error) {
+	args := filters.NewArgs(filters.KeyValuePair{
+		Key:   "name",
+		Value: networkName,
+	})
+
+	networks, err := cli.NetworkList(ctx, types.NetworkListOptions{
+		Filters: args,
+	})
+
+	if err != nil {
+		return "", err
+	}
+
+	for _, network := range networks {
+		fmt.Println("Network ID: ", network.ID)
+		fmt.Println("Network Name: ", network.Name)
+
+	}
+
+	return networks[0].ID, nil
+}
+
 func findVolume(ctx context.Context, cli *client.Client, volumeName string) (volumeId string, err error) {
 	args := filters.NewArgs(filters.KeyValuePair{
 		Key:   "name",
@@ -179,7 +202,7 @@ func main() {
 	}
 
 	runContainer(ctx, cli, "wordpress-web", "wordpress", "wordpress-web")
-
 	findVolume(ctx, cli, "wordpress-web")
+	findNetwork(ctx, cli, "wordpress_hosting")
 
 }
