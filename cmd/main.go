@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	//"github.com/docker/docker/api/types/volume"
+	"github.com/docker/docker/api/types/volume"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -58,7 +58,7 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 	defer out.Close()
 	io.Copy(os.Stdout, out)
 
-	//volume, err := cli.VolumeCreate(ctx, volume.CreateOptions{Name: containerName})
+	volume, err := cli.VolumeCreate(ctx, volume.CreateOptions{Name: containerName})
 
 	if err != nil {
 		panic(err)
@@ -66,10 +66,9 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 
 	config := &container.Config{
 		Image: containerImage,
-		Volumes: map[string]struct{}{
-			//volume.Name + ":/var/www/html": {},
+		/*Volumes: map[string]struct{}{
 			"wordpress-web:/var/www/html": {},
-		},
+		},*/
 		ExposedPorts: nat.PortSet{
 			"80/tcp": struct{}{},
 		},
@@ -95,7 +94,7 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 		Mounts: []mount.Mount{
 			{
 				Type:   mount.TypeVolume,
-				Source: "wordpress-web",
+				Source: volume.Name,
 				Target: "/var/www/html",
 			},
 		},
