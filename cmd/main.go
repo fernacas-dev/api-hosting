@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"os"
 
 	"github.com/docker/docker/api/types/volume"
@@ -81,17 +82,16 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 	defer out.Close()
 	io.Copy(os.Stdout, out)
 
-	volume, err := cli.VolumeCreate(ctx, volume.CreateOptions{Name: containerName})
-
-	if err != nil {
-		panic(err)
+	if volumeName == "" {
+		volume, err := cli.VolumeCreate(ctx, volume.CreateOptions{Name: containerName})
+		if err != nil {
+			panic(err)
+		}
+		volumeName = volume.Name
 	}
 
 	config := &container.Config{
 		Image: containerImage,
-		/*Volumes: map[string]struct{}{
-			"wordpress-web:/var/www/html": {},
-		},*/
 		ExposedPorts: nat.PortSet{
 			"80/tcp": struct{}{},
 		},
@@ -111,13 +111,12 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 		},
 		Resources: container.Resources{
 			MemoryReservation: 512 * 1024 * 1024,
-			//CpusetCpus:        "0,5",
-			CPUQuota: 10000,
+			CPUQuota:          10000,
 		},
 		Mounts: []mount.Mount{
 			{
 				Type:   mount.TypeVolume,
-				Source: volume.Name,
+				Source: volumeName,
 				Target: "/var/www/html",
 			},
 		},
@@ -204,7 +203,7 @@ func main() {
 	volumeName, err := findVolume(ctx, cli, "wordpress-web")
 
 	if err != nil {
-		panic(err)
+		log.Fatalln(err)
 	}
 
 	networkId, err := findNetwork(ctx, cli, "wordpress_hosting")
