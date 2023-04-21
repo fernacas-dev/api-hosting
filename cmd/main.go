@@ -47,7 +47,6 @@ func findNetwork(ctx context.Context, cli *client.Client, networkName string) (n
 	for _, network := range networks {
 		fmt.Println("Network ID: ", network.ID)
 		fmt.Println("Network Name: ", network.Name)
-
 	}
 
 	return networks[0].ID, nil
@@ -68,6 +67,10 @@ func findVolume(ctx context.Context, cli *client.Client, volumeName string) (vol
 	for _, volume := range volumes.Volumes {
 		fmt.Println("Volume Name: ", volume.Name)
 		fmt.Println("Volume Usage Data: ", volume.UsageData)
+	}
+
+	if len(volumes.Volumes) == 0 {
+		return "", nil
 	}
 
 	return volumes.Volumes[0].Name, nil
@@ -155,7 +158,6 @@ func removeContainer(ctx context.Context, cli *client.Client, containerID string
 		panic(err)
 	}
 	fmt.Println("Container removed")
-
 }
 
 func findContainer(ctx context.Context, cli *client.Client, name string) (containerID string, err error) {
