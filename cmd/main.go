@@ -69,10 +69,10 @@ func findVolume(ctx context.Context, cli *client.Client, volumeName string) (vol
 		fmt.Println("Volume Usage Data: ", volume.UsageData)
 	}
 
-	return "volumes[0]", nil
+	return volumes.Volumes[0].Name, nil
 }
 
-func runContainer(ctx context.Context, cli *client.Client, containerName string, containerImage string, volumeName string) {
+func runContainer(ctx context.Context, cli *client.Client, containerName string, containerImage string, volumeName string, networkId string) {
 
 	out, err := cli.ImagePull(ctx, containerImage, types.ImagePullOptions{All: false})
 	if err != nil {
@@ -124,7 +124,7 @@ func runContainer(ctx context.Context, cli *client.Client, containerName string,
 	}
 
 	netConfig := network.EndpointSettings{
-		NetworkID: "9fcfd027e514324d99e13eb8b7089be1e9f966f7a21445b75bc7602bfcde1902",
+		NetworkID: networkId,
 	}
 
 	networkConfig := network.NetworkingConfig{
@@ -201,8 +201,18 @@ func main() {
 		removeContainer(ctx, cli, containerID)
 	}
 
-	runContainer(ctx, cli, "wordpress-web", "wordpress", "wordpress-web")
-	findVolume(ctx, cli, "wordpress-web")
-	findNetwork(ctx, cli, "wordpress_hosting")
+	volumeName, err := findVolume(ctx, cli, "wordpress-web")
+
+	if err != nil {
+		panic(err)
+	}
+
+	networkId, err := findNetwork(ctx, cli, "wordpress_hosting")
+
+	if err != nil {
+		panic(err)
+	}
+
+	runContainer(ctx, cli, "wordpress-web", "wordpress", volumeName, networkId)
 
 }
