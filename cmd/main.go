@@ -7,6 +7,8 @@ import (
 	"io"
 	"os"
 
+	//"github.com/docker/docker/api/types/volume"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
@@ -27,7 +29,29 @@ func listContainers(ctx context.Context, cli *client.Client) {
 	}
 }
 
-func runContainer(ctx context.Context, cli *client.Client, containerName string, containerImage string) {
+func findVolume(ctx context.Context, cli *client.Client, volumeName string) (volumeId string, err error) {
+	args := filters.NewArgs(filters.KeyValuePair{
+		Key:   "name",
+		Value: volumeName,
+	})
+
+	volumes, err := cli.VolumeList(ctx, args)
+
+	if err != nil {
+		return "", err
+	}
+
+	for _, volume := range volumes.Volumes {
+		fmt.Println("Volume Name: ", volume.Name)
+		fmt.Println("Volume Name: ", volume.UsageData)
+		fmt.Println("Volume Usage Data: ", volume.UsageData)
+		fmt.Println("Volume Usage Data: ", volume.UsageData)
+	}
+
+	return "volumes[0]", nil
+}
+
+func runContainer(ctx context.Context, cli *client.Client, containerName string, containerImage string, volumeName string) {
 
 	out, err := cli.ImagePull(ctx, containerImage, types.ImagePullOptions{All: false})
 	if err != nil {
@@ -157,6 +181,8 @@ func main() {
 		removeContainer(ctx, cli, containerID)
 	}
 
-	runContainer(ctx, cli, "wordpress-web", "wordpress")
+	//runContainer(ctx, cli, "wordpress-web", "wordpress", "wordpress-web")
+
+	findVolume(ctx, cli, "wordpress-web")
 
 }
