@@ -43,8 +43,6 @@ func findVolume(ctx context.Context, cli *client.Client, volumeName string) (vol
 
 	for _, volume := range volumes.Volumes {
 		fmt.Println("Volume Name: ", volume.Name)
-		fmt.Println("Volume Name: ", volume.UsageData)
-		fmt.Println("Volume Usage Data: ", volume.UsageData)
 		fmt.Println("Volume Usage Data: ", volume.UsageData)
 	}
 
@@ -181,7 +179,7 @@ func main() {
 		removeContainer(ctx, cli, containerID)
 	}
 
-	//runContainer(ctx, cli, "wordpress-web", "wordpress", "wordpress-web")
+	runContainer(ctx, cli, "wordpress-web", "wordpress", "wordpress-web")
 
 	findVolume(ctx, cli, "wordpress-web")
 
