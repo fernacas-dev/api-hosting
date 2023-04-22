@@ -208,7 +208,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	networkId, err := findNetwork(ctx, cli, "wordpress_hosting")
+	networkId, err := findNetwork(ctx, cli, "database_network")
 
 	if err != nil {
 		panic(err)
