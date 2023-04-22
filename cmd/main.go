@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"vendor/internal/controllers"
-	"vendor/internal/models/requests"
-	service "vendor/internal/services"
+	"internal/controllers"
+	"internal/models/requests"
+	service "internal/services"
 
 	"github.com/docker/docker/client"
 )
