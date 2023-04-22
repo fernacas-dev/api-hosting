@@ -1,10 +1,10 @@
 package controllers
 
 import (
+	"api-hosting/internal/models/requests"
+	service "api-hosting/internal/services"
 	"fmt"
 	"log"
-	"vendor/internal/models/requests"
-	service "vendor/internal/services"
 )
 
 type DockerController struct {

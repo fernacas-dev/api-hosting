@@ -1,12 +1,12 @@
 package service
 
 import (
+	"api-hosting/internal/models/requests"
 	"context"
 	"errors"
 	"fmt"
 	"io"
 	"os"
-	"vendor/internal/models/requests"
 
 	"github.com/docker/docker/api/types/volume"
 

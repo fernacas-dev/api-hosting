@@ -1,10 +1,10 @@
 package main
 
 import (
+	"api-hosting/internal/controllers"
+	"api-hosting/internal/models/requests"
+	service "api-hosting/internal/services"
 	"context"
-	"internal/controllers"
-	"internal/models/requests"
-	service "internal/services"
 
 	"github.com/docker/docker/client"
 )
