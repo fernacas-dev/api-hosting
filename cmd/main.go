@@ -2,188 +2,12 @@ package main
 
 import (
 	"context"
-	"errors"
-	"fmt"
-	"io"
-	"log"
-	"os"
+	"vendor/internal/controllers"
+	"vendor/internal/models/requests"
+	service "vendor/internal/services"
 
-	"github.com/docker/docker/api/types/volume"
-
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/filters"
-	"github.com/docker/docker/api/types/mount"
-	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
-	"github.com/docker/go-connections/nat"
 )
-
-func listContainers(ctx context.Context, cli *client.Client) {
-	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
-	if err != nil {
-		panic(err)
-	}
-
-	for _, container := range containers {
-		fmt.Println(container.ID)
-	}
-}
-
-func findNetwork(ctx context.Context, cli *client.Client, networkName string) (networkId string, err error) {
-	args := filters.NewArgs(filters.KeyValuePair{
-		Key:   "name",
-		Value: networkName,
-	})
-
-	networks, err := cli.NetworkList(ctx, types.NetworkListOptions{
-		Filters: args,
-	})
-
-	if err != nil {
-		return "", err
-	}
-
-	for _, network := range networks {
-		fmt.Println("Network ID: ", network.ID)
-		fmt.Println("Network Name: ", network.Name)
-	}
-
-	return networks[0].ID, nil
-}
-
-func findVolume(ctx context.Context, cli *client.Client, volumeName string) (volumeId string, err error) {
-	args := filters.NewArgs(filters.KeyValuePair{
-		Key:   "name",
-		Value: volumeName,
-	})
-
-	volumes, err := cli.VolumeList(ctx, args)
-
-	if err != nil {
-		return "", err
-	}
-
-	for _, volume := range volumes.Volumes {
-		fmt.Println("Volume Name: ", volume.Name)
-		fmt.Println("Volume Usage Data: ", volume.UsageData)
-	}
-
-	if len(volumes.Volumes) == 0 {
-		return "", nil
-	}
-
-	return volumes.Volumes[0].Name, nil
-}
-
-func runContainer(ctx context.Context, cli *client.Client, containerName string, containerImage string, volumeName string, networkId string) {
-
-	out, err := cli.ImagePull(ctx, containerImage, types.ImagePullOptions{All: false})
-	if err != nil {
-		panic(err)
-	}
-	defer out.Close()
-	io.Copy(os.Stdout, out)
-
-	if volumeName == "" {
-		volume, err := cli.VolumeCreate(ctx, volume.CreateOptions{Name: containerName})
-		if err != nil {
-			panic(err)
-		}
-		volumeName = volume.Name
-	}
-
-	config := &container.Config{
-		Image: containerImage,
-		ExposedPorts: nat.PortSet{
-			"80/tcp": struct{}{},
-		},
-		Labels: map[string]string{
-			"traefik.http.routers.wordpress.rule": "Host(`wordpress.docker.vps`)",
-		},
-	}
-
-	hostConfig := &container.HostConfig{
-		PortBindings: nat.PortMap{
-			"80/tcp": []nat.PortBinding{
-				{
-					HostIP:   "0.0.0.0",
-					HostPort: "4140",
-				},
-			},
-		},
-		Resources: container.Resources{
-			MemoryReservation: 512 * 1024 * 1024,
-			CPUQuota:          10000,
-		},
-		Mounts: []mount.Mount{
-			{
-				Type:   mount.TypeVolume,
-				Source: volumeName,
-				Target: "/var/www/html",
-			},
-		},
-	}
-
-	netConfig := network.EndpointSettings{
-		NetworkID: networkId,
-	}
-
-	networkConfig := network.NetworkingConfig{
-		EndpointsConfig: map[string]*network.EndpointSettings{
-			"traefik_default": &netConfig,
-		},
-	}
-
-	resp, err := cli.ContainerCreate(ctx, config, hostConfig, &networkConfig, nil, containerName)
-	if err != nil {
-		panic(err)
-	}
-
-	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
-		panic(err)
-	}
-
-	fmt.Println(resp.ID)
-}
-
-func removeContainer(ctx context.Context, cli *client.Client, containerID string) {
-	err := cli.ContainerStop(ctx, containerID, container.StopOptions{})
-	if err != nil {
-		panic(err)
-	}
-
-	err = cli.ContainerRemove(ctx, containerID, types.ContainerRemoveOptions{RemoveVolumes: false, Force: true})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("Container removed")
-}
-
-func findContainer(ctx context.Context, cli *client.Client, name string) (containerID string, err error) {
-	args := filters.NewArgs(filters.KeyValuePair{
-		Key:   "name",
-		Value: name,
-	})
-
-	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{
-		Filters: args,
-	})
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	for _, container := range containers {
-		fmt.Println(container.ID)
-	}
-
-	if len(containers) > 0 {
-		return containers[0].ID, nil
-	}
-
-	return "", errors.New("Container not found")
-}
 
 func main() {
 	ctx := context.Background()
@@ -193,27 +17,14 @@ func main() {
 	}
 	defer cli.Close()
 
-	containerID, err := findContainer(ctx, cli, "wordpress")
-
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("ContainerID: ", containerID)
-		removeContainer(ctx, cli, containerID)
+	createWordpressServiceRequest := requests.CreateWordpressServiceRequest{
+		ContainerImage: "wordpress",
+		ContainerName:  "wordpress-web",
+		VolumeName:     "wordpress-web",
+		NetworkName:    "database_network",
 	}
 
-	volumeName, err := findVolume(ctx, cli, "wordpress-web")
-
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	networkId, err := findNetwork(ctx, cli, "database_network")
-
-	if err != nil {
-		panic(err)
-	}
-
-	runContainer(ctx, cli, "wordpress-web", "wordpress", volumeName, networkId)
-
+	dockerService := service.NewDockerService(ctx, cli)
+	dockerController := controllers.NewDockerController(dockerService)
+	dockerController.CreateWordpressService(createWordpressServiceRequest)
 }
