@@ -24,9 +24,9 @@ func NewDockerController(dockerService service.IDockerService) IDockerController
 
 func (dockerController *DockerController) CreateWordpressService(c *gin.Context) {
 	createWordpressServiceRequest := requests.CreateWordpressServiceRequest{
-		ContainerImage: "wordpress",
-		ContainerName:  "wordpress-web",
-		VolumeName:     "wordpress-web",
+		ContainerImage: c.PostForm("containerImage"),
+		ContainerName:  c.PostForm("containerName"),
+		VolumeName:     c.PostForm("volumeName"),
 		NetworkName:    "database_network",
 	}
 
