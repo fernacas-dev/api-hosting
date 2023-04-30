@@ -8,5 +8,5 @@ servicio=api-hosting
 #PRODUCTION
 docker run -d \
   --name $servicio \
-  --publish 8081:8081 \
+  --publish 8081:8080 \
   $servicio
