@@ -6,6 +6,9 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
+	"math/rand"
+	"strconv"
+	"time"
 )
 
 type DockerController struct {
@@ -29,6 +32,9 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 		VolumeName:     c.PostForm("volumeName"),
 		NetworkName:    "database_network",
 	}
+
+	rand.Seed(time.Now().UnixNano())
+	createWordpressServiceRequest.ContainerName = createWordpressServiceRequest.ContainerName + strconv.Itoa(rand.Intn(20))
 
 	containerID, err := dockerController.dockerService.FindContainer(createWordpressServiceRequest.ContainerName)
 
