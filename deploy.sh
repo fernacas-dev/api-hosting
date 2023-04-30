@@ -9,5 +9,4 @@ servicio=api-hosting
 docker run -d \
   --name $servicio \
   --publish 8081:8081 \
-  --network=database_network \
   $servicio
