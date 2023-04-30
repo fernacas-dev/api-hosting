@@ -51,7 +51,7 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 		panic(err)
 	}
 
-	dockerController.dockerService.RunContainer(createWordpressServiceRequest, networkId)
+	go dockerController.dockerService.RunContainer(createWordpressServiceRequest, networkId)
 
 	c.JSON(200, gin.H{
 		"message": "pong",
