@@ -34,7 +34,7 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	createWordpressServiceRequest.ContainerName = createWordpressServiceRequest.ContainerName + strconv.Itoa(rand.Intn(20))
+	createWordpressServiceRequest.ContainerName = createWordpressServiceRequest.ContainerName + strconv.Itoa(rand.Intn(999999))
 	createWordpressServiceRequest.VolumeName = createWordpressServiceRequest.ContainerName
 
 	containerID, err := dockerController.dockerService.FindContainer(createWordpressServiceRequest.ContainerName)
