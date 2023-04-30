@@ -27,5 +27,5 @@ func main() {
 		})
 	})
 	r.GET("/ping", dockerController.CreateWordpressService)
-	r.Run("0.0.0.0:8088") // listen and serve on 0.0.0.0:8080
+	r.Run("srv53119-206152.vps.etecsa.cu:8088") // listen and serve on 0.0.0.0:8080
 }
