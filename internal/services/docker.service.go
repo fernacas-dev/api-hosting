@@ -129,7 +129,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"80/tcp": []nat.PortBinding{
 				{
 					HostIP:   "0.0.0.0",
-					HostPort: "4140",
+					HostPort: "0",
 				},
 			},
 		},
