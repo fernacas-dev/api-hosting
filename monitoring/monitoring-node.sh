@@ -13,7 +13,7 @@ docker run -p 9100:9100 --name=node-exporter --restart=always \
 
 echo "Start cadvisor"
 
-docker run -p 8084:8080 --name=cadvisor --restart=always \
+docker run -p 8080:8080 --name=cadvisor --restart=always \
   --device /dev/kmsg:/dev/kmsg \
   -v /:/rootfs:ro \
   -v /var/run:/var/run:ro \

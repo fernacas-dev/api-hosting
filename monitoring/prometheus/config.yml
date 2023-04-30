@@ -40,7 +40,7 @@ scrape_configs:
   - job_name: 'cAdvisor'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['172.17.0.5:8084']
+      - targets: ['172.17.0.5:8080']
   #    - targets: ['10.12.170.220:8085']
   #    - targets: ['10.12.170.75:8085']
   #    - targets: ['10.50.4.75:8085']
