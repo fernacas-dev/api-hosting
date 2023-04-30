@@ -39,11 +39,11 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 
 	containerID, err := dockerController.dockerService.FindContainer(createWordpressServiceRequest.ContainerName)
 
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("ContainerID: ", containerID)
-		dockerController.dockerService.RemoveContainer(containerID)
+	for i := 0; err == nil; i++ {
+		containerID, err = dockerController.dockerService.FindContainer(createWordpressServiceRequest.ContainerName)
+		createWordpressServiceRequest.ContainerName = createWordpressServiceRequest.ContainerName + strconv.Itoa(rand.Intn(999999))
+		createWordpressServiceRequest.VolumeName = createWordpressServiceRequest.ContainerName
+		fmt.Println("CotainerID: ", containerID)
 	}
 
 	_, err = dockerController.dockerService.FindVolume(createWordpressServiceRequest.VolumeName)
