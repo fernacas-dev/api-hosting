@@ -120,7 +120,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"80/tcp": struct{}{},
 		},
 		Labels: map[string]string{
-			"traefik.http.routers.wordpress.rule": "Host(`wordpress.docker.vps`)",
+			"traefik.http.routers.wordpress.rule": "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
 		},
 	}
 
