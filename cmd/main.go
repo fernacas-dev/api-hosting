@@ -2,11 +2,11 @@ package main
 
 import (
 	"api-hosting/internal/controllers"
-	"api-hosting/internal/models/requests"
 	service "api-hosting/internal/services"
 	"context"
 
 	"github.com/docker/docker/client"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -17,14 +17,15 @@ func main() {
 	}
 	defer cli.Close()
 
-	createWordpressServiceRequest := requests.CreateWordpressServiceRequest{
-		ContainerImage: "wordpress",
-		ContainerName:  "wordpress-web",
-		VolumeName:     "wordpress-web",
-		NetworkName:    "database_network",
-	}
-
 	dockerService := service.NewDockerService(ctx, cli)
 	dockerController := controllers.NewDockerController(dockerService)
-	dockerController.CreateWordpressService(createWordpressServiceRequest)
+
+	r := gin.Default()
+	r.GET("/healthcheck", func(ctx *gin.Context) {
+		ctx.JSON(200, gin.H{
+			"message": "OK",
+		})
+	})
+	r.GET("/ping", dockerController.CreateWordpressService)
+	r.Run() // listen and serve on 0.0.0.0:8080
 }
