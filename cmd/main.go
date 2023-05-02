@@ -26,6 +26,8 @@ func main() {
 			"message": "OK",
 		})
 	})
+
 	r.POST("/wordpress/create", dockerController.CreateWordpressService)
-	r.Run("0.0.0.0:8080") // listen and serve on 0.0.0.0:8080
+	r.GET("/wordpress/:name", dockerController.GetWordpressService)
+	r.Run(":8081") // listen and serve on 0.0.0.0:8080
 }

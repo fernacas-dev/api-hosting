@@ -27,6 +27,7 @@ type DockerService struct {
 type IDockerService interface {
 	ListContainers()
 	FindContainer(name string) (containerID string, err error)
+	DescribeContainer(name string) (container types.Container, err error)
 	FindNetwork(networkName string) (networkId string, err error)
 	FindVolume(volumeName string) (volumeId string, err error)
 	RunContainer(createWordpressServiceRequest requests.CreateWordpressServiceRequest, networkId string)
@@ -204,4 +205,29 @@ func (dockerService *DockerService) FindContainer(name string) (containerID stri
 	}
 
 	return "", errors.New("Container not found")
+}
+
+func (dockerService *DockerService) DescribeContainer(name string) (container types.Container, err error) {
+	args := filters.NewArgs(filters.KeyValuePair{
+		Key:   "name",
+		Value: name,
+	})
+
+	containers, err := dockerService.cli.ContainerList(dockerService.ctx, types.ContainerListOptions{
+		Filters: args,
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, container := range containers {
+		fmt.Println(container.ID)
+	}
+
+	if len(containers) > 0 {
+		return containers[0], nil
+	}
+
+	return types.Container{}, errors.New("Container not found")
 }

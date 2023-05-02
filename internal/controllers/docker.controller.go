@@ -4,11 +4,12 @@ import (
 	"api-hosting/internal/models/requests"
 	service "api-hosting/internal/services"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"math/rand"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type DockerController struct {
@@ -17,6 +18,7 @@ type DockerController struct {
 
 type IDockerController interface {
 	CreateWordpressService(c *gin.Context)
+	GetWordpressService(c *gin.Context)
 }
 
 func NewDockerController(dockerService service.IDockerService) IDockerController {
@@ -61,6 +63,14 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 	go dockerController.dockerService.RunContainer(createWordpressServiceRequest, networkId)
 
 	c.JSON(200, gin.H{
-		"message": "pong",
+		"message": createWordpressServiceRequest.ContainerName,
+	})
+}
+
+func (dockerController *DockerController) GetWordpressService(c *gin.Context) {
+	name, _ := c.Params.Get("name")
+	containerInfo, _ := dockerController.dockerService.DescribeContainer(name)
+	c.JSON(200, gin.H{
+		"message": containerInfo,
 	})
 }
