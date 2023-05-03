@@ -121,7 +121,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"80/tcp": struct{}{},
 		},
 		Labels: map[string]string{
-			"traefik.http.routers.wordpress.rule": "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
+			"appwrite-traefik.http.routers.wordpress.rule": "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
 		},
 	}
 
@@ -153,7 +153,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 
 	networkConfig := network.NetworkingConfig{
 		EndpointsConfig: map[string]*network.EndpointSettings{
-			"traefik_default": &netConfig,
+			"bridge": &netConfig,
 		},
 	}
 
