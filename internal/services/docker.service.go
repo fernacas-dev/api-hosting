@@ -105,6 +105,7 @@ func (dockerService *DockerService) FindVolume(volumeName string) (volumeId stri
 
 func (dockerService *DockerService) RunContainer(createWordpressServiceRequest requests.CreateWordpressServiceRequest, networkId string) {
 
+	fmt.Println("Start running wpInstance Container")
 	out, err := dockerService.cli.ImagePull(dockerService.ctx, createWordpressServiceRequest.ContainerImage, types.ImagePullOptions{All: false})
 	if err != nil {
 		panic(err)
@@ -172,8 +173,9 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 	}
 
 	//Run Alpine
+	fmt.Println("Start running alpine container")
 	configAlpine := &container.Config{
-		Image: "Alpine",
+		Image: "alpine",
 	}
 
 	hostConfigAlpine := &container.HostConfig{
