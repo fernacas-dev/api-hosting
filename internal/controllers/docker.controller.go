@@ -62,6 +62,7 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 	}
 
 	go dockerController.dockerService.RunContainer(createWordpressServiceRequest, networkId)
+	go dockerController.dockerService.CreateDB(createWordpressServiceRequest.ContainerName)
 
 	c.JSON(200, gin.H{
 		"message": createWordpressServiceRequest.ContainerName,

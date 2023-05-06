@@ -17,6 +17,9 @@ import (
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
 	"github.com/docker/go-connections/nat"
+
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type DockerService struct {
@@ -33,6 +36,7 @@ type IDockerService interface {
 	RunContainer(createWordpressServiceRequest requests.CreateWordpressServiceRequest, networkId string)
 	RemoveContainer(containerID string)
 	RemoveVolume(volumeName string)
+	CreateDB(containerName string)
 }
 
 func NewDockerService(ctx context.Context, cli *client.Client) IDockerService {
@@ -246,4 +250,15 @@ func (dockerService *DockerService) DescribeContainer(name string) (container ty
 	}
 
 	return types.Container{}, errors.New("Container not found")
+}
+
+func (dockerService *DockerService) CreateDB(containerName string) {
+	db, err := sql.Open("mysql", "root:DontTouchMyDbServer2021*@tcp(172.17.0.8:3306)/dbtest")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+	fmt.Println("Success!")
+
+	db.Exec("CREATE DATABASE " + containerName)
 }
