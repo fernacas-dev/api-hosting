@@ -61,8 +61,9 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 		panic(err)
 	}
 
+	dockerController.dockerService.CreateDB(createWordpressServiceRequest.ContainerName)
+
 	go dockerController.dockerService.RunContainer(createWordpressServiceRequest, networkId)
-	go dockerController.dockerService.CreateDB(createWordpressServiceRequest.ContainerName)
 
 	c.JSON(200, gin.H{
 		"message": createWordpressServiceRequest.ContainerName,
