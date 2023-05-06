@@ -180,7 +180,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 		Image: "alpine",
 		Cmd: strslice.StrSlice{
 			"ls",
-			//	"/home",
+			"data",
 		},
 	}
 
