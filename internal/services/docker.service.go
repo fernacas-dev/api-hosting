@@ -134,7 +134,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"WORDPRESS_DB_NAME=" + createWordpressServiceRequest.ContainerName,
 			"WORDPRESS_DB_USER=root",
 			"WORDPRESS_DB_PASSWORD=DontTouchMyDbServer2021",
-			"WORDPRESS_DB_HOST=172.18.0.2",
+			"WORDPRESS_DB_HOST=172.17.0.8",
 		},
 	}
 
