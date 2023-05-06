@@ -189,7 +189,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			{
 				Type:   mount.TypeVolume,
 				Source: createWordpressServiceRequest.VolumeName,
-				Target: "/home/data",
+				Target: "/data",
 			},
 		},
 	}
