@@ -171,6 +171,30 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 		panic(err)
 	}
 
+	//Run Alpine
+	configAlpine := &container.Config{
+		Image: "Alpine",
+	}
+
+	hostConfigAlpine := &container.HostConfig{
+		Mounts: []mount.Mount{
+			{
+				Type:   mount.TypeVolume,
+				Source: createWordpressServiceRequest.VolumeName,
+				Target: "/home/data",
+			},
+		},
+	}
+
+	resp, err = dockerService.cli.ContainerCreate(dockerService.ctx, configAlpine, hostConfigAlpine, &network.NetworkingConfig{}, nil, "alpine-tmp-"+createWordpressServiceRequest.ContainerName)
+	if err != nil {
+		panic(err)
+	}
+
+	if err := dockerService.cli.ContainerStart(dockerService.ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+		panic(err)
+	}
+
 	fmt.Println(resp.ID)
 }
 
