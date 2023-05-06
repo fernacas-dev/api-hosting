@@ -260,6 +260,9 @@ func (dockerService *DockerService) DescribeContainer(name string) (container ty
 }
 
 func (dockerService *DockerService) CreateDB(containerName string) {
+
+	fmt.Println("Starting to create database " + containerName)
+
 	db, err := sql.Open("mysql", "root:DontTouchMyDbServer2021*@tcp(mariadb:3306)/dbtest")
 	if err != nil {
 		panic(err.Error())
