@@ -32,6 +32,7 @@ type IDockerService interface {
 	FindVolume(volumeName string) (volumeId string, err error)
 	RunContainer(createWordpressServiceRequest requests.CreateWordpressServiceRequest, networkId string)
 	RemoveContainer(containerID string)
+	RemoveVolume(volumeName string)
 }
 
 func NewDockerService(ctx context.Context, cli *client.Client) IDockerService {
@@ -180,6 +181,21 @@ func (dockerService *DockerService) RemoveContainer(containerID string) {
 		panic(err)
 	}
 	fmt.Println("Container removed")
+}
+
+func (dockerService *DockerService) RemoveVolume(volumeName string) {
+
+	volumeId, err := dockerService.FindVolume(volumeName)
+	if err != nil {
+		panic(err)
+	}
+
+	err = dockerService.cli.VolumeRemove(dockerService.ctx, volumeId, true)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Volume removed")
 }
 
 func (dockerService *DockerService) FindContainer(name string) (containerID string, err error) {

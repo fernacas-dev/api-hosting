@@ -19,6 +19,7 @@ type DockerController struct {
 type IDockerController interface {
 	CreateWordpressService(c *gin.Context)
 	GetWordpressService(c *gin.Context)
+	DeleteWordpressService(c *gin.Context)
 }
 
 func NewDockerController(dockerService service.IDockerService) IDockerController {
@@ -72,5 +73,14 @@ func (dockerController *DockerController) GetWordpressService(c *gin.Context) {
 	containerInfo, _ := dockerController.dockerService.DescribeContainer(name)
 	c.JSON(200, gin.H{
 		"message": containerInfo,
+	})
+}
+
+func (dockerController *DockerController) DeleteWordpressService(c *gin.Context) {
+	name, _ := c.Params.Get("name")
+	dockerController.dockerService.RemoveContainer(name)
+	dockerController.dockerService.RemoveVolume(name)
+	c.JSON(200, gin.H{
+		"message": "OK",
 	})
 }
