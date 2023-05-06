@@ -134,7 +134,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"WORDPRESS_DB_NAME=" + createWordpressServiceRequest.ContainerName,
 			"WORDPRESS_DB_USER=root",
 			"WORDPRESS_DB_PASSWORD=DontTouchMyDbServer2021*",
-			"WORDPRESS_DB_HOST=172.17.0.8",
+			"WORDPRESS_DB_HOST=mariadb",
 		},
 	}
 
@@ -260,12 +260,16 @@ func (dockerService *DockerService) DescribeContainer(name string) (container ty
 }
 
 func (dockerService *DockerService) CreateDB(containerName string) {
-	db, err := sql.Open("mysql", "root:DontTouchMyDbServer2021*@tcp(172.17.0.8:3306)/dbtest")
+	db, err := sql.Open("mysql", "root:DontTouchMyDbServer2021*@tcp(mariadb:3306)/dbtest")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer db.Close()
-	fmt.Println("Success!")
 
-	db.Exec("CREATE DATABASE " + containerName)
+	res, err := db.Exec("CREATE DATABASE " + containerName)
+
+	fmt.Println(res)
+	fmt.Println(err)
+
+	fmt.Println("Database " + containerName + " created")
 }
