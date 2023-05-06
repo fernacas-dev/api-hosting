@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/docker/docker/api/types/strslice"
 	"github.com/docker/docker/api/types/volume"
 
 	"github.com/docker/docker/api/types"
@@ -19,6 +20,7 @@ import (
 	"github.com/docker/go-connections/nat"
 
 	"database/sql"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -176,6 +178,9 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 	fmt.Println("Start running alpine container")
 	configAlpine := &container.Config{
 		Image: "alpine",
+		Cmd: strslice.StrSlice{
+			"ls /home/data",
+		},
 	}
 
 	hostConfigAlpine := &container.HostConfig{
