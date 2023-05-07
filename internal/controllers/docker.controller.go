@@ -82,6 +82,7 @@ func (dockerController *DockerController) DeleteWordpressService(c *gin.Context)
 	name, _ := c.Params.Get("name")
 	dockerController.dockerService.RemoveContainer(name)
 	dockerController.dockerService.RemoveVolume(name)
+	dockerController.dockerService.DeleteDB(name)
 	c.JSON(200, gin.H{
 		"message": "OK",
 	})

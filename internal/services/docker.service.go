@@ -38,6 +38,7 @@ type IDockerService interface {
 	RemoveContainer(containerID string)
 	RemoveVolume(volumeName string)
 	CreateDB(containerName string)
+	DeleteDB(containerName string)
 }
 
 func NewDockerService(ctx context.Context, cli *client.Client) IDockerService {
@@ -275,4 +276,22 @@ func (dockerService *DockerService) CreateDB(containerName string) {
 	fmt.Println(err)
 
 	fmt.Println("Database " + containerName + " created")
+}
+
+func (dockerService *DockerService) DeleteDB(containerName string) {
+
+	fmt.Println("Starting to delete database " + containerName)
+
+	db, err := sql.Open("mysql", "root:DontTouchMyDbServer2021*@tcp(172.17.0.8:3306)/dbtest")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+
+	res, err := db.Exec("DROP DATABASE " + containerName)
+
+	fmt.Println(res)
+	fmt.Println(err)
+
+	fmt.Println("Database " + containerName + " deleted")
 }
