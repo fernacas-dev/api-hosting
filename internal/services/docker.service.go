@@ -167,7 +167,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 
 	networkConfig := network.NetworkingConfig{
 		EndpointsConfig: map[string]*network.EndpointSettings{
-			"bridge": &netConfig,
+			"appwriteconfig_appwrite": &netConfig,
 		},
 	}
 
