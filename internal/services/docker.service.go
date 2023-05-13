@@ -129,7 +129,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"80/tcp": struct{}{},
 		},
 		Labels: map[string]string{
-			"appwrite-traefik.http.routers.wordpress.rule": "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
+			"traefik.http.routers.wordpress.rule": "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
 		},
 		Env: []string{
 			"WORDPRESS_DB_NAME=" + createWordpressServiceRequest.ContainerName,
