@@ -129,7 +129,12 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"80/tcp": struct{}{},
 		},
 		Labels: map[string]string{
-			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".rule":                      "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
+			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".entrypoints": "appwrite_web",
+			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".service":     createWordpressServiceRequest.ContainerName,
+			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".rule":        "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
+			"traefik.enable":                 "true",
+			"traefik.docker.network":         "appwrite",
+			"traefik.constraint-label-stack": "appwrite",
 			"traefik.http.services." + createWordpressServiceRequest.ContainerName + ".loadbalancer.server.port": "80",
 		},
 		Env: []string{
