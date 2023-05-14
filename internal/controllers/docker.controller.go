@@ -33,7 +33,7 @@ func (dockerController *DockerController) CreateWordpressService(c *gin.Context)
 		ContainerImage: c.PostForm("containerImage"),
 		ContainerName:  c.PostForm("containerName"),
 		VolumeName:     c.PostForm("volumeName"),
-		NetworkName:    "database_network",
+		NetworkName:    "appwriteconfig_appwrite",
 	}
 
 	rand.Seed(time.Now().UnixNano())

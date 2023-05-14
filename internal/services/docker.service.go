@@ -16,7 +16,6 @@ import (
 	"github.com/docker/docker/api/types/mount"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
-	"github.com/docker/go-connections/nat"
 
 	"database/sql"
 
@@ -125,9 +124,6 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 
 	config := &container.Config{
 		Image: createWordpressServiceRequest.ContainerImage,
-		ExposedPorts: nat.PortSet{
-			"80/tcp": struct{}{},
-		},
 		Labels: map[string]string{
 			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".entrypoints": "appwrite_web",
 			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".service":     createWordpressServiceRequest.ContainerName,
