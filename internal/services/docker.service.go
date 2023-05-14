@@ -135,7 +135,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 			"traefik.enable":                 "true",
 			"traefik.docker.network":         "appwrite",
 			"traefik.constraint-label-stack": "appwrite",
-			"traefik.http.services." + createWordpressServiceRequest.ContainerName + ".loadbalancer.server.port": "80",
+			//"traefik.http.services." + createWordpressServiceRequest.ContainerName + ".loadbalancer.server.port": "80",
 		},
 		Env: []string{
 			"WORDPRESS_DB_NAME=" + createWordpressServiceRequest.ContainerName,
