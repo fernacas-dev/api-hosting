@@ -127,7 +127,7 @@ func (dockerService *DockerService) RunContainer(createWordpressServiceRequest r
 		Labels: map[string]string{
 			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".entrypoints": "appwrite_web",
 			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".service":     createWordpressServiceRequest.ContainerName,
-			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".rule":        "Host(`" + createWordpressServiceRequest.ContainerName + ".srv53119-206152.vps.etecsa.cu`)",
+			"traefik.http.routers." + createWordpressServiceRequest.ContainerName + ".rule":        "Host(`" + createWordpressServiceRequest.ContainerName + ".docker.vps`)",
 			"traefik.enable":                 "true",
 			"traefik.docker.network":         "appwrite",
 			"traefik.constraint-label-stack": "appwrite",
